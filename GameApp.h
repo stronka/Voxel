@@ -9,6 +9,7 @@
 
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_opengl.h"
+#include "SDL2/SDL_image.h"
 
 class GameApp
 {
@@ -17,6 +18,9 @@ class GameApp
         SDL_GLContext mainGLContext;
         SDL_TimerID timer;
         bool done;
+
+	Uint32 w;
+	Uint32 h;
     
     public:
         // Constructor and destructor

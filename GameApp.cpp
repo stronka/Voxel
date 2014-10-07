@@ -9,6 +9,12 @@
 
 #include "GameApp.h"
 
+SDL_Surface * image;
+SDL_Texture * texture;
+SDL_Renderer * renderer;
+SDL_Rect pos;
+
+
 // Constructor
 GameApp::GameApp(void)
 {
@@ -30,7 +36,7 @@ void GameApp::InitApp(void)
     
     // Create a 640 by 480 window.
     InitializeSDL(640, 480, contextFlags);
-    CreateOrthographicProjection(4.0, 3.0);
+    CreateOrthographicProjection(1.0, 1.0);
     InstallTimer();
     
 }
@@ -38,21 +44,33 @@ void GameApp::InitApp(void)
 void GameApp::InitializeSDL(Uint32 width, Uint32 height, Uint32 flags)
 {
     int error;
+
+    w = width;
+    h = height;
     
     error = SDL_Init(SDL_INIT_EVERYTHING);
     // Turn on double buffering.
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     
     // Create the window
-    mainWindow = SDL_CreateWindow("SDL2 OpenGL Example", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
+    mainWindow = SDL_CreateWindow("SDL2 OpenGL Example", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, flags);
     mainGLContext = SDL_GL_CreateContext(mainWindow);
-                        
+
+    renderer = SDL_CreateRenderer(mainWindow, -1, 0);
+    image = IMG_Load("media/image.jpg");
+    texture = SDL_CreateTextureFromSurface(renderer,  image);
+
+    pos.x = 0;
+    pos.y = 0;
+    pos.w = w;
+    pos.h = h;
+
 }
 
 void GameApp::CreateOrthographicProjection(GLfloat width, GLfloat height)
 {
     // I use a near plane value of -1, and a far plane value of 1, which is what works best for 2D games.
-    glOrtho(0.0, width, 0.0, height, -1.0, 1.0);
+    glOrtho(0.0, width*2, 0.0, height*2, -1.0, 1.0);
 }
 
 void GameApp::InstallTimer(void)
@@ -81,6 +99,10 @@ void GameApp::Cleanup(void)
 {
     SDL_bool success;
     success = SDL_RemoveTimer(timer);
+
+    SDL_DestroyTexture(texture);
+    SDL_FreeSurface(image);
+    //SDL_DestroyRenderer(renderer);
     
     SDL_GL_DeleteContext(mainGLContext);
     SDL_DestroyWindow(mainWindow);
@@ -100,8 +122,19 @@ void GameApp::EventLoop(void)
                 break;
                 
             case SDL_KEYDOWN:
-                // Quit when user presses a key.
-                done = true;
+		switch( event.key.keysym.sym ){
+                    case SDLK_LEFT:
+                        pos.x -= 1.0;
+                        if (pos.x < 0.0)
+                           done=true;
+                        break;
+                    case SDLK_RIGHT:
+                        pos.x += 1.0;
+                        if (pos.x > 640.0)
+                           done=true;
+                        break;
+		}
+
                 break;
             
             case SDL_QUIT:
@@ -137,8 +170,10 @@ void GameApp::GameLoop(void)
 
 void GameApp::RenderFrame(void) 
 {
+    glClearColor(0,0,0,1);
     glClear(GL_COLOR_BUFFER_BIT);
-    glColor3f(0.7, 0.5, 0.8);
-    glRectf(1.0, 1.0, 3.0, 2.0);
+
+    SDL_RenderCopy(renderer, texture, NULL, &pos);
+
     SDL_GL_SwapWindow(mainWindow);
 }
