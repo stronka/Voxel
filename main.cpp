@@ -3,14 +3,22 @@
  *
  */
 
-#include "GameApp.h"
+#include "sdl_main.h"
 
 int main(int argc, char *argv[])
 {
-    GameApp theGame;
+    Sdl_Main theGame;
+
+    int result = theGame.InitApp();
 	
-	theGame.InitApp();
-	theGame.EventLoop();
+    if (result != 0)
+    {
+       theGame.ErrorMessage("Error during game initialization");
+       theGame.Cleanup();
+       return result;
+    }
+
+    theGame.EventLoop();
     theGame.Cleanup();
     
     return 0;

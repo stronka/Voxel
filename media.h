@@ -5,8 +5,11 @@ class Sdl_Media
 {
    std::vector<SDL_Surface *> is;
    std::vector<SDL_Texture *> ts;
+   Mix_Music *music;
+   std::vector<Mix_Chunk *> scratch;
 
    public:
-      SDL_Texture * texture loadImage();
-      //load song
+      void cleanup();
+      SDL_Texture * loadImage(SDL_Renderer * renderer, std::String name);
+      void loadMusic(std::String name);
 };

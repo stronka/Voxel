@@ -25,19 +25,21 @@ Sdl_Main::~Sdl_Main(void)
 
 
 // Initialization functions
-void Sdl_Main::InitApp(void)
+int Sdl_Main::InitApp(void)
 {
     Uint32 contextFlags;
     contextFlags = SDL_WINDOW_SHOWN|SDL_WINDOW_OPENGL;
     
     // Create a 640 by 480 window.
-    InitializeSDL(640, 480, contextFlags);
+    int result = InitializeSDL(640, 480, contextFlags);
+    if (result != 0)
+       return result;
+
     CreateOrthographicProjection(1.0, 1.0);
     InstallTimer();
-    
 }
 
-void Sdl_Main::InitializeSDL(Uint32 width, Uint32 height, Uint32 flags)
+int Sdl_Main::InitializeSDL(Uint32 width, Uint32 height, Uint32 flags)
 {
     int error;
 
@@ -49,10 +51,19 @@ void Sdl_Main::InitializeSDL(Uint32 width, Uint32 height, Uint32 flags)
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     
     // Create the window
-    mainWindow = SDL_CreateWindow("SDL2 OpenGL Example", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, flags);
+    mainWindow    = SDL_CreateWindow("SDL2 OpenGL Example", 
+                                  SDL_WINDOWPOS_UNDEFINED, 
+                                  SDL_WINDOWPOS_UNDEFINED, 
+                                  w, h, flags);
     mainGLContext = SDL_GL_CreateContext(mainWindow);
 
     renderer = SDL_CreateRenderer(mainWindow, -1, 0);
+
+    //Initialize SDL_mixer 
+    if( Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 ) 
+    { 
+       return false; 
+    }
 
     game_scene.init(renderer);
 }
@@ -90,10 +101,8 @@ void Sdl_Main::Cleanup(void)
     SDL_bool success;
     success = SDL_RemoveTimer(timer);
 
-    SDL_DestroyTexture(texture);
-    SDL_FreeSurface(image);
-    //SDL_DestroyRenderer(renderer);
-    
+    Sdl_Media.clean();
+
     SDL_GL_DeleteContext(mainGLContext);
     SDL_DestroyWindow(mainWindow);
     SDL_Quit();

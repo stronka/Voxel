@@ -30,8 +30,8 @@ class Sdl_Main
         virtual ~Sdl_Main(void);
 
         // Initialization functions
-        void InitApp(void);
-        void InitializeSDL(Uint32 width, Uint32 height, Uint32 flags);
+        int InitApp(void);
+        int InitializeSDL(Uint32 width, Uint32 height, Uint32 flags);
         void CreateOrthographicProjection(GLfloat width, GLfloat height);
         void InstallTimer(void);
         static Uint32 GameLoopTimer(Uint32 interval, void* param);
