@@ -1,5 +1,5 @@
 /*
- *  GameApp.cpp
+ *  Sdl_Main.cpp
  *  SDL Test
  *
  *  Created by Mark Szymczyk on 5/1/06.
@@ -7,29 +7,25 @@
  *
  */
 
-#include "GameApp.h"
+#include "Sdl_Main.h"
 
-SDL_Surface * image;
-SDL_Texture * texture;
-SDL_Renderer * renderer;
-SDL_Rect pos;
 
 
 // Constructor
-GameApp::GameApp(void)
+Sdl_Main::Sdl_Main(void)
 {
     done = false;
 }
 
 // Destructor
-GameApp::~GameApp(void)
+Sdl_Main::~Sdl_Main(void)
 {
     Cleanup();
 }
 
 
 // Initialization functions
-void GameApp::InitApp(void)
+void Sdl_Main::InitApp(void)
 {
     Uint32 contextFlags;
     contextFlags = SDL_WINDOW_SHOWN|SDL_WINDOW_OPENGL;
@@ -41,7 +37,7 @@ void GameApp::InitApp(void)
     
 }
 
-void GameApp::InitializeSDL(Uint32 width, Uint32 height, Uint32 flags)
+void Sdl_Main::InitializeSDL(Uint32 width, Uint32 height, Uint32 flags)
 {
     int error;
 
@@ -57,28 +53,22 @@ void GameApp::InitializeSDL(Uint32 width, Uint32 height, Uint32 flags)
     mainGLContext = SDL_GL_CreateContext(mainWindow);
 
     renderer = SDL_CreateRenderer(mainWindow, -1, 0);
-    image = IMG_Load("media/image.jpg");
-    texture = SDL_CreateTextureFromSurface(renderer,  image);
 
-    pos.x = 0;
-    pos.y = 0;
-    pos.w = w;
-    pos.h = h;
-
+    game_scene.init(renderer);
 }
 
-void GameApp::CreateOrthographicProjection(GLfloat width, GLfloat height)
+void Sdl_Main::CreateOrthographicProjection(GLfloat width, GLfloat height)
 {
     // I use a near plane value of -1, and a far plane value of 1, which is what works best for 2D games.
     glOrtho(0.0, width*2, 0.0, height*2, -1.0, 1.0);
 }
 
-void GameApp::InstallTimer(void)
+void Sdl_Main::InstallTimer(void)
 {
     timer = SDL_AddTimer(30, GameLoopTimer, this);
 }
 
-Uint32 GameApp::GameLoopTimer(Uint32 interval, void* param)
+Uint32 Sdl_Main::GameLoopTimer(Uint32 interval, void* param)
 {
     // Create a user event to call the game loop.
     SDL_Event event;
@@ -95,7 +85,7 @@ Uint32 GameApp::GameLoopTimer(Uint32 interval, void* param)
 
 
 // Cleanup functions
-void GameApp::Cleanup(void)
+void Sdl_Main::Cleanup(void)
 {
     SDL_bool success;
     success = SDL_RemoveTimer(timer);
@@ -111,7 +101,7 @@ void GameApp::Cleanup(void)
 
 
 // Event-related functions
-void GameApp::EventLoop(void)
+void Sdl_Main::EventLoop(void)
 {
     SDL_Event event;
     
@@ -122,19 +112,7 @@ void GameApp::EventLoop(void)
                 break;
                 
             case SDL_KEYDOWN:
-		switch( event.key.keysym.sym ){
-                    case SDLK_LEFT:
-                        pos.x -= 1.0;
-                        if (pos.x < 0.0)
-                           done=true;
-                        break;
-                    case SDLK_RIGHT:
-                        pos.x += 1.0;
-                        if (pos.x > 640.0)
-                           done=true;
-                        break;
-		}
-
+                Game_Scene.key_down(event.key.keysym.sym);
                 break;
             
             case SDL_QUIT:
@@ -149,7 +127,7 @@ void GameApp::EventLoop(void)
         
 }
 
-void GameApp::HandleUserEvents(SDL_Event* event)
+void Sdl_Main::HandleUserEvents(SDL_Event* event)
 {
     switch (event->user.code) {
         case RUN_GAME_LOOP:
@@ -163,17 +141,17 @@ void GameApp::HandleUserEvents(SDL_Event* event)
 
 
 // Game related functions
-void GameApp::GameLoop(void)
+void Sdl_Main::GameLoop(void)
 {
     RenderFrame();    
 }
 
-void GameApp::RenderFrame(void) 
+void Sdl_Main::RenderFrame(void) 
 {
     glClearColor(0,0,0,1);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    SDL_RenderCopy(renderer, texture, NULL, &pos);
+    game_scene.draw(renderer);
 
     SDL_GL_SwapWindow(mainWindow);
 }

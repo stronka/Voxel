@@ -1,5 +1,5 @@
 /*
- *  GameApp.h
+ *  Sdl_Main.h
  *  SDL Test
  *
  *  Created by Mark Szymczyk on 5/1/06.
@@ -11,7 +11,7 @@
 #include "SDL2/SDL_opengl.h"
 #include "SDL2/SDL_image.h"
 
-class GameApp
+class Sdl_Main
 {
     protected:
         SDL_Window* mainWindow;
@@ -19,13 +19,15 @@ class GameApp
         SDL_TimerID timer;
         bool done;
 
+        SDL_Renderer * renderer;
+        Game_Scene game_scene;
 	Uint32 w;
 	Uint32 h;
     
     public:
         // Constructor and destructor
-        GameApp (void);
-        virtual ~GameApp(void);
+        Sdl_Main (void);
+        virtual ~Sdl_Main(void);
 
         // Initialization functions
         void InitApp(void);
@@ -47,7 +49,7 @@ class GameApp
         
 };
 
-typedef GameApp* GameAppPtr;
-typedef GameApp** GameAppHandle;
+typedef Sdl_Main* Sdl_MainPtr;
+typedef Sdl_Main** Sdl_MainHandle;
 
 const int RUN_GAME_LOOP = 1;
