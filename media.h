@@ -1,5 +1,11 @@
-#include <vector.h>
+#include <vector>
+#include <string>
+
 #include "SDL.h"
+#include "SDL_mixer.h"
+
+
+class Sdl_Media;
 
 class Sdl_Media
 {
@@ -8,8 +14,13 @@ class Sdl_Media
    Mix_Music *music;
    std::vector<Mix_Chunk *> scratch;
 
+   static Sdl_Media * me;
+
    public:
-      void cleanup();
-      SDL_Texture * loadImage(SDL_Renderer * renderer, std::String name);
-      void loadMusic(std::String name);
+      void init();
+      void clean();
+      SDL_Texture * load_image(SDL_Renderer * renderer, std::string name);
+      void load_music(std::string name);
+      void load_chunk(std::string name);
+      static Sdl_Media * get();
 };

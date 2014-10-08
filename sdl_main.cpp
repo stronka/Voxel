@@ -7,8 +7,9 @@
  *
  */
 
-#include "Sdl_Main.h"
+#include <iostream>
 
+#include "sdl_main.h"
 
 
 // Constructor
@@ -33,10 +34,15 @@ int Sdl_Main::InitApp(void)
     // Create a 640 by 480 window.
     int result = InitializeSDL(640, 480, contextFlags);
     if (result != 0)
+    {
+       std::cout<<"sdl_main.cpp Cannot initalize SDL"<<std::endl;
        return result;
+    }
 
     CreateOrthographicProjection(1.0, 1.0);
     InstallTimer();
+
+    return 0;
 }
 
 int Sdl_Main::InitializeSDL(Uint32 width, Uint32 height, Uint32 flags)
@@ -62,10 +68,13 @@ int Sdl_Main::InitializeSDL(Uint32 width, Uint32 height, Uint32 flags)
     //Initialize SDL_mixer 
     if( Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 ) 
     { 
-       return false; 
+       std::cout << "Cannot open audio"<<std::endl;
+       //return false; 
     }
 
-    game_scene.init(renderer);
+    game_scene.init(renderer, w, h);
+
+    return 0;
 }
 
 void Sdl_Main::CreateOrthographicProjection(GLfloat width, GLfloat height)
@@ -101,7 +110,7 @@ void Sdl_Main::Cleanup(void)
     SDL_bool success;
     success = SDL_RemoveTimer(timer);
 
-    Sdl_Media.clean();
+    game_scene.clean();
 
     SDL_GL_DeleteContext(mainGLContext);
     SDL_DestroyWindow(mainWindow);
@@ -121,7 +130,7 @@ void Sdl_Main::EventLoop(void)
                 break;
                 
             case SDL_KEYDOWN:
-                Game_Scene.key_down(event.key.keysym.sym);
+                game_scene.key_down(event.key.keysym.sym);
                 break;
             
             case SDL_QUIT:
@@ -160,7 +169,10 @@ void Sdl_Main::RenderFrame(void)
     glClearColor(0,0,0,1);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    game_scene.draw(renderer);
+    game_scene.draw();
 
     SDL_GL_SwapWindow(mainWindow);
+}
+void Sdl_Main::ErrorMessage(std::string text)
+{
 }

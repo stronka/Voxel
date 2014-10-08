@@ -7,9 +7,13 @@
  *
  */
 
+#include <string>
+
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_opengl.h"
 #include "SDL2/SDL_image.h"
+#include "SDL2/SDL_mixer.h"
+#include "scene.h"
 
 class Sdl_Main
 {
@@ -17,6 +21,7 @@ class Sdl_Main
         SDL_Window* mainWindow;
         SDL_GLContext mainGLContext;
         SDL_TimerID timer;
+
         bool done;
 
         SDL_Renderer * renderer;
@@ -47,6 +52,7 @@ class Sdl_Main
         void GameLoop(void);
         void RenderFrame(void);
         
+	void ErrorMessage(std::string text);
 };
 
 typedef Sdl_Main* Sdl_MainPtr;

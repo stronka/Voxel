@@ -4,6 +4,7 @@
  */
 
 #include "sdl_main.h"
+#include <iostream>
 
 int main(int argc, char *argv[])
 {
@@ -15,6 +16,7 @@ int main(int argc, char *argv[])
     {
        theGame.ErrorMessage("Error during game initialization");
        theGame.Cleanup();
+       std::cout << "Error during game initalization" << std::endl;
        return result;
     }
 
