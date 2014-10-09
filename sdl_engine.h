@@ -10,12 +10,12 @@
 #include <string>
 
 #include "game.h"
+#include "scene.h"
 
 class Sdl_Main
 {
     protected:
         SDL_Window* mainWindow;
-        SDL_GLContext mainGLContext;
         SDL_TimerID timer;
 
         bool done;
@@ -23,8 +23,8 @@ class Sdl_Main
 
         SDL_Renderer * renderer;
         Game_Scene game_scene;
-	Uint32 w;
-	Uint32 h;
+	GLfloat w;
+	GLfloat h;
     
     public:
         // Constructor and destructor
@@ -33,8 +33,6 @@ class Sdl_Main
 
         // Initialization functions
         int InitApp(void);
-        int InitializeSDL(Uint32 width, Uint32 height, Uint32 flags);
-        void CreateOrthographicProjection(GLfloat width, GLfloat height);
         void InstallTimer(void);
         static Uint32 GameLoopTimer(Uint32 interval, void* param);
         void toggle_fullscreen();

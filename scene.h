@@ -8,20 +8,22 @@
 #define __H_SCENE__
 
 #include "game.h"
+#include "character.h"
 
 class Game_Scene
 {
    private:
-      int count;
-      SDL_Texture * background;
-      Sdl_Main * engine;
-      int w;
-      int h;
       SDL_Rect pos;
+      Sdl_Main * engine;
+      SDL_Renderer * renderer;
+      float w;
+      float h;
       bool done;
+      SDL_Texture * background;
+      Character * jake;
 
    public:
-      void init(Sdl_Main * en, int width, int height);
+      void init(Sdl_Main * en, float width, float height);
       void draw();
       void cleanup();
       void key_down(int key);

@@ -1,14 +1,25 @@
 
 #include <string.h>
 
-#include "media.h"
 #include "SDL.h"
 #include "SDL_image.h"
 
-Sdl_Media * Sdl_Media::me;
+#include "logger.h"
+#include "media.h"
 
-void Sdl_Media::init()
+Sdl_Media * Sdl_Media::me = NULL;
+
+void Sdl_Media::init(SDL_Renderer * r)
 {
+    renderer = r;
+
+    /*
+    //Initialize SDL_mixer 
+    if( Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 ) 
+    { 
+       Logger::get()->log_error("Cannot open audio");
+    }
+    */
 }
 
 Sdl_Media * Sdl_Media::get()
@@ -42,8 +53,12 @@ void Sdl_Media::cleanup()
    delete me;
    me = NULL;
 }
-SDL_Texture * Sdl_Media::load_image(SDL_Renderer * renderer, std::string name)
+SDL_Texture * Sdl_Media::load_image(std::string name)
 {
+   std::string temp("Media: Loading image: ");
+   temp.append(name.c_str() );
+   Logger::get()->log_info(temp);
+
    is.push_back( IMG_Load(name.c_str() ) );
    ts.push_back( SDL_CreateTextureFromSurface(renderer,  is.back() ) );
 
@@ -52,9 +67,20 @@ SDL_Texture * Sdl_Media::load_image(SDL_Renderer * renderer, std::string name)
 
 void Sdl_Media::load_music(std::string name)
 {
+   std::string temp("Media: Loading music: ");
+   temp.append(name.c_str() );
+   Logger::get()->log_info(temp);
+
    music = Mix_LoadMUS(name.c_str() );
 }
 void Sdl_Media::load_chunk(std::string name)
 {
+   std::string temp("Media: Loading chunk: ");
+   temp.append(name.c_str() );
+
    //sounds.push_back( Mix_LoadWAV(name.c_str() ) );
+}
+SDL_Renderer * Sdl_Media::get_renderer()
+{
+   return renderer;
 }

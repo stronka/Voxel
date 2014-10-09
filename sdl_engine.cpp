@@ -1,5 +1,7 @@
 
 #include <iostream>
+#include <string>
+#include <sstream>
 
 #include "sdl_engine.h"
 
@@ -21,59 +23,47 @@ Sdl_Main::~Sdl_Main(void)
 // Initialization functions
 int Sdl_Main::InitApp(void)
 {
-    Uint32 contextFlags;
-    contextFlags = SDL_WINDOW_SHOWN|SDL_WINDOW_OPENGL;
+    int error;
+    Uint32 contextFlags = SDL_WINDOW_SHOWN|SDL_WINDOW_OPENGL;
+
+    w = 640.0;
+    h = 480.0;
     
     // Create a 640 by 480 window.
-    int result = InitializeSDL(640, 480, contextFlags);
-    if (result != 0)
-    {
-       std::cout<<"sdl_main.cpp Cannot initalize SDL"<<std::endl;
-       return result;
-    }
-
-    CreateOrthographicProjection(1.0, 1.0);
-    InstallTimer();
-
-    return 0;
-}
-
-int Sdl_Main::InitializeSDL(Uint32 width, Uint32 height, Uint32 flags)
-{
-    int error;
-
-    w = width;
-    h = height;
-    
     error = SDL_Init(SDL_INIT_EVERYTHING);
     // Turn on double buffering.
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     
     // Create the window
-    mainWindow    = SDL_CreateWindow("SDL2 OpenGL Example", 
+    mainWindow    = SDL_CreateWindow("Voxel",
                                   SDL_WINDOWPOS_UNDEFINED, 
                                   SDL_WINDOWPOS_UNDEFINED, 
-                                  w, h, flags);
-    mainGLContext = SDL_GL_CreateContext(mainWindow);
-
-    renderer = SDL_CreateRenderer(mainWindow, -1, 0);
-
-    //Initialize SDL_mixer 
-    if( Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 ) 
-    { 
-       std::cout << "Cannot open audio"<<std::endl;
-       //return false; 
+                                  w, h, contextFlags);
+    if (mainWindow == NULL)
+    {
+       Logger::get()->log_error("Could not create window");
+       return 1;
     }
+    renderer = SDL_CreateRenderer(mainWindow, -1, 0);
+    if (renderer == NULL)
+    {
+       Logger::get()->log_error("Could not create window");
+       return 1;
+    }
+    Sdl_Media::get()->init(renderer);
 
-    game_scene.init(renderer, w, h);
+    //glOrtho(0.0, w, h, 0.0, -1.0, 1.0);
+
+    std::ostringstream ss;
+    ss << "sdl_engine.cpp: Created window:"<<w<<"x"<<h;
+    Logger::get()->log_info(ss.str() );
+
+    game_scene.init(this, w, h);
+
+
+    InstallTimer();
 
     return 0;
-}
-
-void Sdl_Main::CreateOrthographicProjection(GLfloat width, GLfloat height)
-{
-    // I use a near plane value of -1, and a far plane value of 1, which is what works best for 2D games.
-    glOrtho(0.0, width*2, 0.0, height*2, -1.0, 1.0);
 }
 
 void Sdl_Main::InstallTimer(void)
@@ -105,7 +95,7 @@ void Sdl_Main::Cleanup(void)
 
     game_scene.cleanup();
 
-    SDL_GL_DeleteContext(mainGLContext);
+    //SDL_GL_DeleteContext(mainGLContext);
     SDL_DestroyWindow(mainWindow);
     SDL_Quit();
 }
@@ -159,12 +149,12 @@ void Sdl_Main::GameLoop(void)
 
 void Sdl_Main::RenderFrame(void) 
 {
-    glClearColor(0,0,0,1);
-    glClear(GL_COLOR_BUFFER_BIT);
-
     game_scene.draw();
 
-    SDL_GL_SwapWindow(mainWindow);
+    //SDL_RenderCopy(renderer, tex, NULL, NULL);
+    SDL_RenderPresent(renderer);
+
+    //SDL_GL_SwapWindow(mainWindow);
 }
 void Sdl_Main::ErrorMessage(std::string text)
 {

@@ -7,7 +7,7 @@
 #define __H_LOGGER_H
 
 #include <string>
-#include <ofstream>
+#include <fstream>
 
 class Logger;
 
@@ -28,7 +28,7 @@ class Logger
       void log_debug(std::string text);
       void cleanup();
 
-      static Logger get();
+      static Logger * get();
 
       static const int LVL_DEBUG = 2;
       static const int LVL_INFO = 1;
