@@ -1,8 +1,17 @@
+/*
+ * This is a class used for media loading
+ *
+ */
+
+#ifndef __H_MEDIA_H_
+#define __H_MEDIA_H_
+
 #include <vector>
 #include <string>
 
 #include "SDL.h"
 #include "SDL_mixer.h"
+#include "SDL_image.h"
 
 
 class Sdl_Media;
@@ -18,9 +27,12 @@ class Sdl_Media
 
    public:
       void init();
-      void clean();
+      void cleanup();
       SDL_Texture * load_image(SDL_Renderer * renderer, std::string name);
       void load_music(std::string name);
       void load_chunk(std::string name);
       static Sdl_Media * get();
 };
+
+
+#endif

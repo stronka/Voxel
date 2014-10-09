@@ -20,7 +20,7 @@ Sdl_Media * Sdl_Media::get()
    return me;
 }
 
-void Sdl_Media::clean()
+void Sdl_Media::cleanup()
 {
 /*
    for (item in sounds)
@@ -44,7 +44,6 @@ void Sdl_Media::clean()
 }
 SDL_Texture * Sdl_Media::load_image(SDL_Renderer * renderer, std::string name)
 {
-   //"media/image.jpg"
    is.push_back( IMG_Load(name.c_str() ) );
    ts.push_back( SDL_CreateTextureFromSurface(renderer,  is.back() ) );
 

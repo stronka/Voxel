@@ -1,21 +1,14 @@
-/*
- *  Sdl_Main.cpp
- *  SDL Test
- *
- *  Created by Mark Szymczyk on 5/1/06.
- *  Copyright 2006 Me and Mark Publishing. All rights reserved.
- *
- */
 
 #include <iostream>
 
-#include "sdl_main.h"
+#include "sdl_engine.h"
 
 
 // Constructor
 Sdl_Main::Sdl_Main(void)
 {
-    done = false;
+   fullscreen = false;
+   done = false;
 }
 
 // Destructor
@@ -110,7 +103,7 @@ void Sdl_Main::Cleanup(void)
     SDL_bool success;
     success = SDL_RemoveTimer(timer);
 
-    game_scene.clean();
+    game_scene.cleanup();
 
     SDL_GL_DeleteContext(mainGLContext);
     SDL_DestroyWindow(mainWindow);
@@ -175,4 +168,24 @@ void Sdl_Main::RenderFrame(void)
 }
 void Sdl_Main::ErrorMessage(std::string text)
 {
+}
+SDL_Renderer * Sdl_Main::getRenderer()
+{
+   return renderer;
+}
+void Sdl_Main::toggle_fullscreen()
+{
+   fullscreen = !fullscreen;
+   if (fullscreen)
+   {
+      SDL_SetWindowFullscreen(mainWindow, SDL_WINDOW_FULLSCREEN);
+   }
+   else
+   {
+      SDL_SetWindowFullscreen(mainWindow, 0);
+   }
+}
+void Sdl_Main::close()
+{
+   done = true;
 }

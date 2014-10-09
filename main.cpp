@@ -3,11 +3,13 @@
  *
  */
 
-#include "sdl_main.h"
 #include <iostream>
+#include "game.h"
 
 int main(int argc, char *argv[])
 {
+   Logger::get()->init(Logger::LVL_DEBUG);
+
     Sdl_Main theGame;
 
     int result = theGame.InitApp();
@@ -16,7 +18,7 @@ int main(int argc, char *argv[])
     {
        theGame.ErrorMessage("Error during game initialization");
        theGame.Cleanup();
-       std::cout << "Error during game initalization" << std::endl;
+       Logger::get()->log_error("Error during game initalization");
        return result;
     }
 
