@@ -1,7 +1,9 @@
+/**
+*/
 #ifndef __H_CHARACTER_H_
 #define __H_CHARACTER_H_
 
-#include "SDL.h"
+#include "game.h"
 #include "media.h"
 
 class Character

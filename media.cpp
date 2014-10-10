@@ -1,6 +1,7 @@
 
 #include <string.h>
 
+#include <GL/gl.h>
 #include "SDL.h"
 #include "SDL_image.h"
 
@@ -9,10 +10,8 @@
 
 Sdl_Media * Sdl_Media::me = NULL;
 
-void Sdl_Media::init(SDL_Renderer * r)
+void Sdl_Media::init()
 {
-    renderer = r;
-
     /*
     //Initialize SDL_mixer 
     if( Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 ) 
@@ -83,8 +82,4 @@ void Sdl_Media::load_chunk(std::string name)
    temp.append(name.c_str() );
 
    //sounds.push_back( Mix_LoadWAV(name.c_str() ) );
-}
-SDL_Renderer * Sdl_Media::get_renderer()
-{
-   return renderer;
 }

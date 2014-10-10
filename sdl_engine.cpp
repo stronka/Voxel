@@ -1,10 +1,12 @@
+/**
+*/
 
 #include <iostream>
 #include <string>
 #include <sstream>
 
 #include "sdl_engine.h"
-
+#include "logger.h"
 
 // Constructor
 Sdl_Main::Sdl_Main(void)
@@ -51,9 +53,7 @@ int Sdl_Main::InitApp(void)
        Logger::get()->log_error("Could not create window");
        return 1;
     }
-    Sdl_Media::get()->init(renderer);
-
-    //glOrtho(0.0, w, h, 0.0, -1.0, 1.0);
+    Sdl_Media::get()->init();
 
     std::ostringstream ss;
     ss << "sdl_engine.cpp: Created window:"<<w<<"x"<<h;
@@ -61,8 +61,13 @@ int Sdl_Main::InitApp(void)
 
     game_scene.init(this, w, h);
 
+    glViewport(0, 0, w, h);
+   glMatrixMode(GL_PROJECTION);  // To operate on the Projection matrix
+   glLoadIdentity();             // Reset
+
     glOrtho(0.0,w,h,0.0,-1.0,1.0);
 
+   glMatrixMode(GL_MODELVIEW);
     glEnable(GL_TEXTURE_2D);
 
     InstallTimer();
@@ -159,7 +164,7 @@ void Sdl_Main::RenderFrame(void)
 
    game_scene.draw();
 
-   SDL_GL_SwapBuffers();
+   SDL_GL_SwapWindow(mainWindow);
 }
 SDL_Renderer * Sdl_Main::getRenderer()
 {

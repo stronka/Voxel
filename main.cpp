@@ -4,8 +4,10 @@
  */
 
 #include <iostream>
-#include "game.h"
+
 #include "sdl_engine.h"
+#include "game.h"
+#include "logger.h"
 
 int main(int argc, char *argv[])
 {

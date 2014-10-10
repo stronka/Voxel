@@ -25,16 +25,16 @@ void Game_Scene::draw()
 {
    glBindTexture(GL_TEXTURE_2D,background);
 
-    glBegin(GL_QUADS);
-    glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(  0.0f, 0.0f, -1.0f);
-    glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(    w,  0.0f, -1.0f);
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex3f(    w,  h,    -1.0f);
-    glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(  0.0f, h,    -1.0f);
-    glEnd();
+   glBegin(GL_QUADS);
+   glTexCoord2f(0.0f, 0.0f);
+   glVertex3f(  0.0f, 0.0f, -1.0f);
+   glTexCoord2f(1.0f, 0.0f);
+   glVertex3f(    w,  0.0f, -1.0f);
+   glTexCoord2f(1.0f, 1.0f);
+   glVertex3f(    w,  h,    -1.0f);
+   glTexCoord2f(0.0f, 1.0f);
+   glVertex3f(  0.0f, h,    -1.0f);
+   glEnd();
 
    jake->display();
 }

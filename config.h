@@ -3,9 +3,10 @@
 
 class Config
 {
-   Config * me;
+   static Config * me;
+
    public:
-      Config()
+      Config();
       static Config * get();
 };
 

@@ -18,22 +18,19 @@ class Sdl_Media;
 
 class Sdl_Media
 {
-   std::vector<SDL_Surface *> is;
-   std::vector<SDL_Texture *> ts;
+   std::vector<GLuint> ts;
    Mix_Music *music;
    std::vector<Mix_Chunk *> scratch;
-   SDL_Renderer * renderer;
 
    static Sdl_Media * me;
 
    public:
-      void init(SDL_Renderer * r);
+      void init();
 
       void cleanup();
-      SDL_Texture * load_image(std::string name);
+      GLuint load_image(std::string name);
       void load_music(std::string name);
       void load_chunk(std::string name);
-      SDL_Renderer * get_renderer();
 
       static Sdl_Media * get();
 };

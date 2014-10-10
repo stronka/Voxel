@@ -1,14 +1,16 @@
 
+#include "pugixml.hpp"
+
 #include "config.h"
 
 
-Config * Config::me = NULL;
+Config * Config::me = 0;
 
 Config::Config()
 {
    pugi::xml_document doc;
    pugi::xml_parse_result result = doc.load_file("config/config.xml");
-   doc.child("items")
+   //doc.child("items")
    pugi::xml_node items = doc.child("items");
 
    for (pugi::xml_node item = items.child("item"); item; item = item.next_sibling("item"))
@@ -27,9 +29,9 @@ Config::Config()
       }
    }
 }
-static Config * Config::get()
+Config * Config::get()
 {
-   if (me == NULL)
+   if (me == 0)
    {
       me = new Config();
    }
