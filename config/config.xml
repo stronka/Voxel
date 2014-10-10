@@ -1,0 +1,20 @@
+<items>
+   <menu>
+      <item label="Start game" />
+      <item label="Options" />
+      <item label="Exit" />
+   </menu>
+   <video>
+      <item label="intro" file="" />
+   </vide>
+   <level>
+      <item label="level1" file="level1.xml" />
+      <item label="level2" file="level1.xml" />
+   </level>
+   <flow>
+      <item>mainMenu</item>
+      <item>intro</item>
+      <item>level1</item>
+      <item>level2</item>
+   </flow>
+</items>

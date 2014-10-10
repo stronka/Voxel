@@ -9,7 +9,7 @@ class Character
    private:
       int x;
       int y;
-      SDL_Texture * sprite;
+      GLuint sprite;
 
    public:
       Character(int posx, int posy);

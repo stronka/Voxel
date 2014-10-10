@@ -50,8 +50,6 @@ class Sdl_Main
         // Game related functions
         void GameLoop(void);
         void RenderFrame(void);
-        
-	void ErrorMessage(std::string text);
 };
 
 typedef Sdl_Main* Sdl_MainPtr;

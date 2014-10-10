@@ -43,24 +43,28 @@ void Sdl_Media::cleanup()
 
    for (item in ts)
    {
-      SDL_DestroyTexture(item);
-   }
-   for (item in is)
-   {
-      SDL_FreeSurface(item);
+      glDeleteTextures(1,&texture);
    }
 */
    delete me;
    me = NULL;
 }
-SDL_Texture * Sdl_Media::load_image(std::string name)
+GLuint Sdl_Media::load_image(std::string name)
 {
    std::string temp("Media: Loading image: ");
    temp.append(name.c_str() );
    Logger::get()->log_info(temp);
 
-   is.push_back( IMG_Load(name.c_str() ) );
-   ts.push_back( SDL_CreateTextureFromSurface(renderer,  is.back() ) );
+   GLuint texture;
+   SDL_Surface* surface = IMG_Load(name.c_str() );
+   glGenTextures(1,&texture);
+   glBindTexture(GL_TEXTURE_2D,texture);
+   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, surface->w,surface->h, 0, GL_RGB,GL_UNSIGNED_BYTE,surface->pixels);
+   glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+   SDL_FreeSurface(surface);
+
+   ts.push_back(texture);
 
    return ts.back();
 }

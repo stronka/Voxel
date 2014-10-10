@@ -19,7 +19,7 @@ class Game_Scene
       float w;
       float h;
       bool done;
-      SDL_Texture * background;
+      GLuint texture;
       Character * jake;
 
    public:

@@ -14,3 +14,27 @@ loads music
 scene.
 loads media
 displays the scene
+
+
+Game configuration
+   menu(s)
+   video(s)
+   Level(s)
+       character
+       npcs
+       items
+       background
+   flow
+
+
+http://www.geometrian.com/programming/tutorials/texturegl/index.php
+
+int main()
+{
+   Sdl_Engine engine(SDL_Engine::HD_Format);
+   return 0;
+}
+
+SDL_engine
+
+Game

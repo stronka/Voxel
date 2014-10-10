@@ -19,7 +19,6 @@ int main(int argc, char *argv[])
 	
    if (result != 0)
    {
-      theGame.ErrorMessage("Error during game initialization");
       theGame.Cleanup();
       Logger::get()->log_error("Error during game initalization");
       return result;

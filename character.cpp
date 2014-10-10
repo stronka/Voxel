@@ -5,17 +5,20 @@ Character::Character(int posx, int posy)
    x = posx;
    y = posy;
 
-   sprite = Sdl_Media::get()->load_image("level1/media/char_jake.jpg");
+   sprite = Sdl_Media::get()->load_image("media/level1/char_jake.jpg");
 }
 void Character::display()
 {
-   SDL_Rect pos;
-   pos.x = x;
-   pos.y = y;
-   pos.w = 20;
-   pos.h = 20;
+   glBindTexture(GL_TEXTURE_2D,sprite);
 
-   SDL_RenderCopy(Sdl_Media::get()->get_renderer(), sprite, NULL, &pos);
+   glBegin(GL_TRIANGLES);
+   glTexCoord2f(0.0f,0.0f);
+   glVertex3f( 0.0f, 0.1f, 1.0f);
+   glTexCoord2f(1.0f,0.0f);
+   glVertex3f(-0.1f,-0.1f, 1.0f);
+   glTexCoord2f(0.0f,1.0f);
+   glVertex3f( 1.0f,-0.2f, 1.0f);
+   glEnd();
 }      
 void Character::go_left()
 {

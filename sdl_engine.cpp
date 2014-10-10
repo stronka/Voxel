@@ -26,13 +26,14 @@ int Sdl_Main::InitApp(void)
     int error;
     Uint32 contextFlags = SDL_WINDOW_SHOWN|SDL_WINDOW_OPENGL;
 
-    w = 640.0;
-    h = 480.0;
+    w = 1280.0;
+    h = 720.0;
     
     // Create a 640 by 480 window.
     error = SDL_Init(SDL_INIT_EVERYTHING);
     // Turn on double buffering.
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
     
     // Create the window
     mainWindow    = SDL_CreateWindow("Voxel",
@@ -60,6 +61,9 @@ int Sdl_Main::InitApp(void)
 
     game_scene.init(this, w, h);
 
+    glOrtho(0.0,w,h,0.0,-1.0,1.0);
+
+    glEnable(GL_TEXTURE_2D);
 
     InstallTimer();
 
@@ -94,8 +98,8 @@ void Sdl_Main::Cleanup(void)
     success = SDL_RemoveTimer(timer);
 
     game_scene.cleanup();
+    Sdl_Media::get()->cleanup();
 
-    //SDL_GL_DeleteContext(mainGLContext);
     SDL_DestroyWindow(mainWindow);
     SDL_Quit();
 }
@@ -149,15 +153,13 @@ void Sdl_Main::GameLoop(void)
 
 void Sdl_Main::RenderFrame(void) 
 {
-    game_scene.draw();
+   glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
-    //SDL_RenderCopy(renderer, tex, NULL, NULL);
-    SDL_RenderPresent(renderer);
+   glLoadIdentity();
 
-    //SDL_GL_SwapWindow(mainWindow);
-}
-void Sdl_Main::ErrorMessage(std::string text)
-{
+   game_scene.draw();
+
+   SDL_GL_SwapBuffers();
 }
 SDL_Renderer * Sdl_Main::getRenderer()
 {

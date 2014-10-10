@@ -6,5 +6,6 @@ g++ -c -o media.o media.cpp  -lX11 -lGL -lGLU `sdl2-config --cflags` `sdl2-confi
 g++ -c -o logger.o logger.cpp  -lX11 -lGL -lGLU `sdl2-config --cflags` `sdl2-config --libs` -lSDL2_image -lSDL2_mixer
 g++ -c -o config.o config.cpp  -lX11 -lGL -lGLU `sdl2-config --cflags` `sdl2-config --libs` -lSDL2_image -lSDL2_mixer
 g++ -c -o character.o character.cpp  -lX11 -lGL -lGLU `sdl2-config --cflags` `sdl2-config --libs` -lSDL2_image -lSDL2_mixer
+g++ -c -o pugixml.o pugixml.cpp  -lX11 -lGL -lGLU `sdl2-config --cflags` `sdl2-config --libs` -lSDL2_image -lSDL2_mixer
 g++ -c -o main.o main.cpp -lX11 -lGL -lGLU `sdl2-config --cflags` `sdl2-config --libs` -lSDL2_image  -lSDL2_mixer
-g++ -o game main.o sdl_engine.o scene.o media.o logger.o config.o character.o -lX11 -lGL -lGLU `sdl2-config --cflags` `sdl2-config --libs` -lSDL2_image  -lSDL2_mixer
+g++ -o game main.o sdl_engine.o scene.o media.o logger.o config.o character.o pugixml.o -lX11 -lGL -lGLU `sdl2-config --cflags` `sdl2-config --libs` -lSDL2_image  -lSDL2_mixer
