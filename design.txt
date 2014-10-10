@@ -1,19 +1,19 @@
 
 /*************************************************************************/
 main()
-main function
+   main function
 /*************************************************************************/
 sdl_engine.
-main sdl processing
-calls scene for setup
+   window/opengl setup
+   fires up media loading
 /*************************************************************************/
 media.
-loads pictures
-loads music
+   loads pictures
+   loads music
 /*************************************************************************/
 scene.
-loads media
-displays the scene
+   sets items in place
+   displays the scene
 
 
 Game configuration
@@ -36,5 +36,8 @@ int main()
 }
 
 SDL_engine
+   fires media loading
+   clears media
 
 Game
+   puts items in place

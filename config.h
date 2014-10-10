@@ -3,8 +3,10 @@
 
 class Config
 {
+   Config * me;
    public:
-      void load_config();
+      Config()
+      static Config * get();
 };
 
 #endif

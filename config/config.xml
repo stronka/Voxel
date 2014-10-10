@@ -1,20 +1,20 @@
 <items>
-   <menu>
-      <item label="Start game" />
-      <item label="Options" />
-      <item label="Exit" />
-   </menu>
-   <video>
-      <item label="intro" file="" />
-   </vide>
-   <level>
-      <item label="level1" file="level1.xml" />
-      <item label="level2" file="level1.xml" />
-   </level>
-   <flow>
-      <item>mainMenu</item>
-      <item>intro</item>
-      <item>level1</item>
-      <item>level2</item>
-   </flow>
+   <item type="menu">
+      <inner label="Start game" />
+      <inner label="Options" />
+      <inner label="Exit" />
+   </item>
+   <item type="video">
+      <inner label="intro" file="" />
+   </item>
+   <item type="level">
+      <inner label="level1" file="level1.xml" />
+      <inner label="level2" file="level1.xml" />
+   </item>
+   <item= type="flow">
+      <inner>mainMenu</inner>
+      <inner>intro</inner>
+      <inner>level1</inner>
+      <inner>level2</inner>
+   </item>
 </items>
