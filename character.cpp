@@ -12,31 +12,33 @@ void Character::display()
    //
    glBindTexture(GL_TEXTURE_2D,sprite);
 
+   glTranslatef(x,y,0);
+
    glBegin(GL_QUADS);
-   glTexCoord2f(0.0f, 0.0f);
-   glVertex3f(  0.0f, 0.0f, -1.0f);
-   glTexCoord2f(1.0f, 0.0f);
-   glVertex3f(    70,  0.0f, -1.0f);
-   glTexCoord2f(1.0f, 1.0f);
-   glVertex3f(    70,  70,    -1.0f);
    glTexCoord2f(0.0f, 1.0f);
-   glVertex3f(  0.0f, 70,    -1.0f);
+   glVertex3f(  0.0f, 0.0f, -1.0f);
+   glTexCoord2f(1.0f, 1.0f);
+   glVertex3f(    70, 0.0f, -1.0f);
+   glTexCoord2f(1.0f, 0.0f);
+   glVertex3f(    70,  70,    -1.0f);
+   glTexCoord2f(0.0f, 0.0f);
+   glVertex3f(  0.0f,  70,    -1.0f);
    glEnd();
 }      
 void Character::go_left()
 {
-   x -= 1.5;
+   x -= 4;
 }
 void Character::go_right()
 {
-   x += 1.5;
+   x += 4;
 }
 
 void Character::go_up()
 {
-   y += 1.5;
+   y += 4;
 }
 void Character::go_down()
 {
-   y -= 1.5;
+   y -= 4;
 }

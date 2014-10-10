@@ -15,7 +15,7 @@ void Game_Scene::init(Sdl_Main * en, float width, float height)
 
    background = Sdl_Media::get()->load_image("media/level1/background.jpg");
 
-   jake = new Character(0,0);
+   jake = new Character(200,200);
 }
 void Game_Scene::cleanup()
 {
@@ -26,13 +26,13 @@ void Game_Scene::draw()
    glBindTexture(GL_TEXTURE_2D,background);
 
    glBegin(GL_QUADS);
-   glTexCoord2f(0.0f, 0.0f);
-   glVertex3f(  0.0f, 0.0f, -1.0f);
-   glTexCoord2f(1.0f, 0.0f);
-   glVertex3f(    w,  0.0f, -1.0f);
-   glTexCoord2f(1.0f, 1.0f);
-   glVertex3f(    w,  h,    -1.0f);
    glTexCoord2f(0.0f, 1.0f);
+   glVertex3f(  0.0f, 0.0f, -1.0f);
+   glTexCoord2f(1.0f, 1.0f);
+   glVertex3f(    w,  0.0f, -1.0f);
+   glTexCoord2f(1.0f, 0.0f);
+   glVertex3f(    w,  h,    -1.0f);
+   glTexCoord2f(0.0f, 0.0f);
    glVertex3f(  0.0f, h,    -1.0f);
    glEnd();
 

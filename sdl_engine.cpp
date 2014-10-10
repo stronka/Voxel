@@ -62,12 +62,12 @@ int Sdl_Main::InitApp(void)
     game_scene.init(this, w, h);
 
     glViewport(0, 0, w, h);
-   glMatrixMode(GL_PROJECTION);  // To operate on the Projection matrix
-   glLoadIdentity();             // Reset
+    glMatrixMode(GL_PROJECTION);  // To operate on the Projection matrix
+    glLoadIdentity();             // Reset
 
-    glOrtho(0.0,w,h,0.0,-1.0,1.0);
+    glOrtho(0.0,w,0,h,-1.0,1.0);
 
-   glMatrixMode(GL_MODELVIEW);
+    glMatrixMode(GL_MODELVIEW);
     glEnable(GL_TEXTURE_2D);
 
     InstallTimer();
