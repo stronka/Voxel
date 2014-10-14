@@ -29,6 +29,7 @@ class Sdl_Media
 
       void cleanup();
       GLuint load_image(std::string name);
+      void draw(GLuint tex, GLfloat x, GLfloat y, GLfloat w, GLfloat h);
       void load_music(std::string name);
       void load_chunk(std::string name);
 

@@ -5,40 +5,52 @@ Character::Character(int posx, int posy)
    x = posx;
    y = posy;
 
+   dirx=0;
+   diry=0;
+
    sprite = Sdl_Media::get()->load_image("media/level1/char_jake.jpg");
 }
 void Character::display()
 {
-   //
-   glBindTexture(GL_TEXTURE_2D,sprite);
-
-   glTranslatef(x,y,0);
-
-   glBegin(GL_QUADS);
-   glTexCoord2f(0.0f, 1.0f);
-   glVertex3f(  0.0f, 0.0f, -1.0f);
-   glTexCoord2f(1.0f, 1.0f);
-   glVertex3f(    70, 0.0f, -1.0f);
-   glTexCoord2f(1.0f, 0.0f);
-   glVertex3f(    70,  70,    -1.0f);
-   glTexCoord2f(0.0f, 0.0f);
-   glVertex3f(  0.0f,  70,    -1.0f);
-   glEnd();
-}      
-void Character::go_left()
-{
-   x -= 4;
+   Sdl_Media::get()->draw(sprite,x,y,70.0,70.0);
 }
-void Character::go_right()
+void Character::go_left(bool on)
 {
-   x += 4;
+   if (on)
+      dirx = -1;
+   else
+      dirx = 0;
+}
+void Character::go_right(bool on)
+{
+   if (on)
+      dirx = 1;
+   else
+      dirx = 0;
 }
 
-void Character::go_up()
+void Character::go_up(bool on)
 {
-   y += 4;
+   if (on)
+      diry = 1;
+   else
+      diry = 0;
 }
-void Character::go_down()
+void Character::go_down(bool on)
 {
-   y -= 4;
+   if (on)
+      diry = -1;
+   else
+      diry = 0;
+}
+void Character::update()
+{
+   if (dirx == 1)
+      x += 4;
+   if (dirx == -1)
+      x -= 4;
+   if (diry == 1)
+      y += 4;
+   if (diry == -1)
+      y -= 4;
 }

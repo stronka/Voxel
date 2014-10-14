@@ -27,6 +27,8 @@ class Game_Scene
       void draw();
       void cleanup();
       void key_down(int key);
+      void key_up(int key);
+      void update();
 };
 
 #endif

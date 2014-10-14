@@ -23,18 +23,7 @@ void Game_Scene::cleanup()
 }
 void Game_Scene::draw()
 {
-   glBindTexture(GL_TEXTURE_2D,background);
-
-   glBegin(GL_QUADS);
-   glTexCoord2f(0.0f, 1.0f);
-   glVertex3f(  0.0f, 0.0f, -1.0f);
-   glTexCoord2f(1.0f, 1.0f);
-   glVertex3f(    w,  0.0f, -1.0f);
-   glTexCoord2f(1.0f, 0.0f);
-   glVertex3f(    w,  h,    -1.0f);
-   glTexCoord2f(0.0f, 0.0f);
-   glVertex3f(  0.0f, h,    -1.0f);
-   glEnd();
+   Sdl_Media::get()->draw(background,0.0,0.0,w,h);
 
    jake->display();
 }
@@ -43,22 +32,43 @@ void Game_Scene::key_down(int key)
 {
     switch( key ){
         case SDLK_LEFT:
-            jake->go_left();
+            jake->go_left(true);
             break;
         case SDLK_RIGHT:
-            jake->go_right();
+            jake->go_right(true);
             break;
         case SDLK_UP:
-            jake->go_up();
+            jake->go_up(true);
             break;
         case SDLK_DOWN:
-            jake->go_down();
+            jake->go_down(true);
             break;
         case SDLK_f:
-            engine->toggle_fullscreen();;
+            engine->toggle_fullscreen();
             break;
         case SDLK_q:
             engine->close();
             break;
     }
+}
+void Game_Scene::key_up(int key)
+{
+    switch( key ){
+        case SDLK_LEFT:
+            jake->go_left(false);
+            break;
+        case SDLK_RIGHT:
+            jake->go_right(false);
+            break;
+        case SDLK_UP:
+            jake->go_up(false);
+            break;
+        case SDLK_DOWN:
+            jake->go_down(false);
+            break;
+    }
+}
+void Game_Scene::update()
+{
+   jake->update();
 }

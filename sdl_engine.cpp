@@ -124,6 +124,9 @@ void Sdl_Main::EventLoop(void)
             case SDL_KEYDOWN:
                 game_scene.key_down(event.key.keysym.sym);
                 break;
+            case SDL_KEYUP:
+                game_scene.key_up(event.key.keysym.sym);
+                break;
             
             case SDL_QUIT:
                 done = true;
@@ -153,7 +156,8 @@ void Sdl_Main::HandleUserEvents(SDL_Event* event)
 // Game related functions
 void Sdl_Main::GameLoop(void)
 {
-    RenderFrame();    
+   game_scene.update();
+   RenderFrame();    
 }
 
 void Sdl_Main::RenderFrame(void) 
