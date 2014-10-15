@@ -8,6 +8,7 @@ class Config
    public:
       Config();
       static Config * get();
+      LevelConfiguration * get_level(std::string);
 };
 
 #endif

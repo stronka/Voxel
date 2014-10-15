@@ -9,15 +9,16 @@
 class Character
 {
    private:
-      int x;
-      int y;
+      GLfloat x;
+      GLfloat y;
       GLuint sprite;
       int dirx;
       int diry;
+      GLfloat sx,sy;
 
    public:
-      Character(int posx, int posy);
-      void display();
+      Character(GLfloat posx, GLfloat posy);
+      void draw();
       void go_left(bool on);
       void go_right(bool on);
       void go_up(bool on);

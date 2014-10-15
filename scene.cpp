@@ -13,6 +13,8 @@ void Game_Scene::init(Sdl_Main * en, float width, float height)
 
    engine = en;
 
+   Level_Config * level1 = Config::get()->get_level("level1");
+
    background = Sdl_Media::get()->load_image("media/level1/background.jpg");
 
    jake = new Character(200,200);
@@ -25,7 +27,7 @@ void Game_Scene::draw()
 {
    Sdl_Media::get()->draw(background,0.0,0.0,w,h);
 
-   jake->display();
+   jake->draw();
 }
 
 void Game_Scene::key_down(int key)

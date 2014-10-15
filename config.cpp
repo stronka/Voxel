@@ -17,15 +17,19 @@ Config::Config()
    {
       if (item.attribute("type").value() == "menu")
       {
+         std::cout<<"Found menu"<<std::endl;
       }
       if (item.attribute("type").value() == "video")
       {
+         std::cout<<"Found video"<<std::endl;
       }
       if (item.attribute("type").value() == "level")
       {
+         std::cout<<"Found level"<<std::endl;
       }
       if (item.attribute("type").value() == "flow")
       {
+         std::cout<<"Found float"<<std::endl;
       }
    }
 }
@@ -35,4 +39,8 @@ Config * Config::get()
    {
       me = new Config();
    }
+}
+Level_Config * get_level(std::string)
+{
+   return new Level_Config();
 }

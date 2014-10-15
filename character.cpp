@@ -1,18 +1,21 @@
 #include "character.h"
 
-Character::Character(int posx, int posy)
+Character::Character(GLfloat posx, GLfloat posy)
 {
    x = posx;
    y = posy;
+
+   sx = 50;
+   sy = 50;
 
    dirx=0;
    diry=0;
 
    sprite = Sdl_Media::get()->load_image("media/level1/char_jake.jpg");
 }
-void Character::display()
+void Character::draw()
 {
-   Sdl_Media::get()->draw(sprite,x,y,70.0,70.0);
+   Sdl_Media::get()->draw(sprite,x,y,sx,sy);
 }
 void Character::go_left(bool on)
 {
@@ -46,11 +49,11 @@ void Character::go_down(bool on)
 void Character::update()
 {
    if (dirx == 1)
-      x += 4;
+      x += 4.0f;
    if (dirx == -1)
-      x -= 4;
+      x -= 4.0f;
    if (diry == 1)
-      y += 4;
+      y += 4.0f;
    if (diry == -1)
-      y -= 4;
+      y -= 4.0f;
 }
