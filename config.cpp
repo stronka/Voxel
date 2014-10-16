@@ -16,19 +16,19 @@ Config::Config()
 
    for (pugi::xml_node item = items.child("item"); item; item = item.next_sibling("item"))
    {
-      if (item.attribute("type").value() == "menu")
+      if (strcmp(item.attribute("type").value(),"menu") == 0)
       {
          std::cout<<"Found menu"<<std::endl;
       }
-      if (item.attribute("type").value() == "video")
+      if (strcmp(item.attribute("type").value(),"video") == 0)
       {
          std::cout<<"Found video"<<std::endl;
       }
-      if (item.attribute("type").value() == "level")
+      if (strcmp(item.attribute("type").value(), "level") == 0)
       {
          std::cout<<"Found level"<<std::endl;
       }
-      if (item.attribute("type").value() == "flow")
+      if (strcmp(item.attribute("type").value(), "flow") == 0)
       {
          std::cout<<"Found float"<<std::endl;
       }

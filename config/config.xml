@@ -11,7 +11,7 @@
       <inner label="level1" file="level1.xml" />
       <inner label="level2" file="level1.xml" />
    </item>
-   <item= type="flow">
+   <item type="flow">
       <inner>mainMenu</inner>
       <inner>intro</inner>
       <inner>level1</inner>
