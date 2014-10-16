@@ -1,6 +1,7 @@
 
-#include "pugixml.hpp"
+#include <iostream>
 
+#include "pugixml.hpp"
 #include "config.h"
 
 
@@ -40,7 +41,7 @@ Config * Config::get()
       me = new Config();
    }
 }
-Level_Config * get_level(std::string)
+Level_Config * Config::get_level(std::string)
 {
    return new Level_Config();
 }

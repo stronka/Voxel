@@ -3,6 +3,7 @@
 #include "scene.h"
 #include "sdl_engine.h"
 #include "media.h"
+#include "config.h"
 
 //SDL_Texture * tex;
 

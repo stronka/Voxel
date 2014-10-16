@@ -73,13 +73,13 @@ void Sdl_Media::draw(GLuint tex, GLfloat x, GLfloat y, GLfloat w, GLfloat h)
 
    glBegin(GL_QUADS);
    glTexCoord2f(0.0f, 1.0f);
-   glVertex3f(    x,  y, -1.0f);
+   glVertex3f(    x,   y, -1.0f);
    glTexCoord2f(1.0f, 1.0f);
-   glVertex3f(    w,  y, -1.0f);
+   glVertex3f(  x+w,   y, -1.0f);
    glTexCoord2f(1.0f, 0.0f);
-   glVertex3f(    w,  h, -1.0f);
+   glVertex3f(  x+w, y+h, -1.0f);
    glTexCoord2f(0.0f, 0.0f);
-   glVertex3f(    x, h,  -1.0f);
+   glVertex3f(    x, y+h, -1.0f);
    glEnd();
 }
 
