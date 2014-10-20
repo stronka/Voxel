@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
    {
       theGame.Cleanup();
       Logger::get()->log_error("Error during game initalization");
+      Logger::get()->cleanup();
       return result;
    }
 
@@ -32,6 +33,7 @@ int main(int argc, char *argv[])
    theGame.Cleanup();
 
    Logger::get()->log_debug("main: closed");
+   Logger::get()->cleanup();
    
    return 0;
 }

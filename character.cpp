@@ -1,17 +1,19 @@
 #include "character.h"
 
-Character::Character(GLfloat posx, GLfloat posy)
+Character::Character()
 {
-   x = posx;
-   y = posy;
+   x = 0;
+   y = 0;
 
    sx = 50;
    sy = 50;
 
    dirx=0;
    diry=0;
-
-   sprite = Sdl_Media::get()->load_image("media/level1/char_jake.jpg");
+}
+void Character::set_sprite(std::string name)
+{
+   sprite = Sdl_Media::get()->load_image(name);
 }
 void Character::draw()
 {
@@ -56,4 +58,25 @@ void Character::update()
       y += 4.0f;
    if (diry == -1)
       y -= 4.0f;
+}
+void Character::set_name(std::string nam)
+{
+   name = nam;
+}
+void Character::set_start(int posx, int posy)
+{
+   x = 50*posx;
+   y = 50*posy;
+}
+void Character::set_input(std::string i)
+{
+   input = i;
+}
+std::string Character::get_input()
+{
+   return input;
+}
+std::string Character::get_name()
+{
+   return name;
 }

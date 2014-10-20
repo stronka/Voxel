@@ -59,7 +59,13 @@ int Sdl_Main::InitApp(void)
     ss << "sdl_engine.cpp: Created window:"<<w<<"x"<<h;
     Logger::get()->log_info(ss.str() );
 
-    game_scene.init(this, w, h);
+    Logger::get()->log_info("sdl_engine.cpp: Initializing scene");
+    if (game_scene.init(this, w, h) != 0)
+    {
+        Logger::get()->log_error("sdl_engine.cpp: Error initializing scene");
+        return 2;
+    }
+    Logger::get()->log_info("sdl_engine.cpp: Initialized scene");
 
     glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);  // To operate on the Projection matrix
@@ -71,6 +77,7 @@ int Sdl_Main::InitApp(void)
     glEnable(GL_TEXTURE_2D);
 
     InstallTimer();
+    Logger::get()->log_info("SDL initialization done");
 
     return 0;
 }

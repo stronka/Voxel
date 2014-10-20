@@ -1,12 +1,12 @@
-<level background="background.jpg" music="background.mp3" width=400 height=100 texel_size=50>
+<level background="media/level1/background.jpg" music="background.mp3" width="400" height="100" texel_size="50">
    <!-- objective type reach x y -->
    <!-- objective type destroy label="boss" -->
-   <objective type="reach" x=10,y=10 />
-   <character label="jake" sprite="char_jake.jpg" loc="3,3" input="keyboard" input_type="normal" />
+   <!--objective type="reach" x=10,y=10 /-->
+   <character label="jake" sprite="media/level1/char_jake.jpg" startx="3" starty="3" input="keyboard" input_type="normal" />
    <!-- level 0 - not agressive 10 very aggressive -->
-   <character label="boss" sprite="npc1.jpg" loc="5,3" input="npc" temper="agressive" level=0 />
-   <character sprite="npc1.jpg" loc="7,3" input="npc" temper="agressive" level=3 />
+   <character label="boss" sprite="media/level1/char_jake.jpg" loc="5,3" input="npc" temper="agressive" level="0" />
+   <character sprite="media/level1/char_jake.jpg" loc="7,3" input="npc" temper="agressive" level="3" />
 
-   <item sprite="ground1.jpg" loc="6,3" size="2,1" move="yes" destroyable="yes" />
-   <item sprite="ground1.jpg" loc="6,3" size="2,1" move="no" destroyable="no" />
+   <!--item sprite="ground1.jpg" loc="6,3" size="2,1" move="yes" destroyable="yes" /-->
+   <!--item sprite="ground1.jpg" loc="6,3" size="2,1" move="no" destroyable="no" /-->
 </level>

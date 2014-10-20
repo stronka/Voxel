@@ -56,6 +56,12 @@ GLuint Sdl_Media::load_image(std::string name)
 
    GLuint texture;
    SDL_Surface* surface = IMG_Load(name.c_str() );
+   if (surface == NULL)
+   {
+      Logger::get()->log_error("Media: missing image or cannot read image file");
+   }
+   Logger::get()->log_info("Media: loaded image");
+
    glGenTextures(1,&texture);
    glBindTexture(GL_TEXTURE_2D,texture);
    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, surface->w,surface->h, 0, GL_RGB,GL_UNSIGNED_BYTE,surface->pixels);
@@ -64,6 +70,8 @@ GLuint Sdl_Media::load_image(std::string name)
    SDL_FreeSurface(surface);
 
    ts.push_back(texture);
+
+   Logger::get()->log_info("Media: loaded image end");
 
    return ts.back();
 }

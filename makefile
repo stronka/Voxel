@@ -1,7 +1,7 @@
 CXX=g++
 CFLAGS=-c `sdl2-config --cflags`
 LDFLAGS=-lX11 -lGL -lGLU -lSDL2 -lSDL2_image -lSDL2_mixer
-SOURCES=main.cpp sdl_engine.cpp media.cpp config.cpp scene.cpp logger.cpp pugixml.cpp character.cpp
+SOURCES=main.cpp sdl_engine.cpp media.cpp config.cpp scene.cpp logger.cpp pugixml.cpp character.cpp config_level.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=game
 
