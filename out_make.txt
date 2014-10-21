@@ -1,0 +1,49 @@
+In file included from sdl_engine.h:13:0,
+                 from main.cpp:8:
+scene.h:24:7: error: ‘Level_Config’ does not name a type
+       Level_Config * level;
+       ^
+scene.h:28:36: error: return type specification for constructor invalid
+       void Game_Scene(Sdl_Main * en);
+                                    ^
+main.cpp: In function ‘int main(int, char**)’:
+main.cpp:18:18: error: ‘Config’ has not been declared
+    int Wwidth  = Config::get()->get_width();
+                  ^
+main.cpp:19:18: error: ‘Config’ has not been declared
+    int Wheight = Config::get()->get_height();
+                  ^
+main.cpp:21:42: error: no matching function for call to ‘Sdl_Main::Sdl_Main(int&, int&)’
+    Sdl_Main theGameWindow(Wwidth, Wheight);
+                                          ^
+main.cpp:21:42: note: candidates are:
+In file included from main.cpp:8:0:
+sdl_engine.h:31:9: note: Sdl_Main::Sdl_Main()
+         Sdl_Main (void);
+         ^
+sdl_engine.h:31:9: note:   candidate expects 0 arguments, 2 provided
+sdl_engine.h:15:7: note: Sdl_Main::Sdl_Main(const Sdl_Main&)
+ class Sdl_Main
+       ^
+sdl_engine.h:15:7: note:   candidate expects 1 argument, 2 provided
+main.cpp:22:15: error: no matching function for call to ‘Game_Scene::Game_Scene()’
+    Game_Scene scene;
+               ^
+main.cpp:22:15: note: candidates are:
+In file included from sdl_engine.h:13:0,
+                 from main.cpp:8:
+scene.h:28:12: note: Game_Scene::Game_Scene(Sdl_Main*)
+       void Game_Scene(Sdl_Main * en);
+            ^
+scene.h:28:12: note:   candidate expects 1 argument, 0 provided
+scene.h:14:7: note: Game_Scene::Game_Scene(const Game_Scene&)
+ class Game_Scene
+       ^
+scene.h:14:7: note:   candidate expects 1 argument, 0 provided
+main.cpp:23:10: error: ‘class Game_Scene’ has no member named ‘load’
+    scene.load();
+          ^
+main.cpp:24:18: error: ‘class Sdl_Main’ has no member named ‘set_scene’
+    theGameWindow.set_scene(&scene);
+                  ^
+make: *** [main.o] Błąd 1
