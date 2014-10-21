@@ -17,15 +17,14 @@ class Game_Scene
       SDL_Rect pos;
       Sdl_Main * engine;
       SDL_Renderer * renderer;
-      float w;
-      float h;
       bool done;
       GLuint background;
       Character * jake;
       std::list<Character*> characters;
 
    public:
-      int init(Sdl_Main * en, float width, float height);
+      int init();
+      void Game_Scene(Sdl_Main * en);
       void draw();
       void cleanup();
       void key_down(int key);

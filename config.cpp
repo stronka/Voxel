@@ -33,22 +33,47 @@ Config::Config()
       if (strcmp(item.attribute("type").value(), "level") == 0)
       {
          Logger::get()->log_debug("Found level");
-         for (pugi::xml_node litem = item.child("inner"); litem; litem = item.next_sibling("inner"))
-         {
-            std::string fname = "config/";
-            fname.append(litem.attribute("file").value());
 
-            load_level(litem.attribute("label").value(), fname);
-         }
+         read_levels();
       }
       if (strcmp(item.attribute("type").value(), "flow") == 0)
       {
          Logger::get()->log_debug("Found flow");
       }
+      if (strcmp(item.attribute("type").value(), "setup") == 0)
+      {
+         Logger::get()->log_debug("Found setup");
+         read_setup(item);
+      }
    }
    Logger::get()->log_info("Loading configuration complete");
 }
+void Config::read_setup(pugi::xml_node node)
+{
+   for (pugi::xml_node litem = item.child("inner"); litem; litem = item.next_sibling("inner"))
+   {
+      if (strcmp(litem.attribute("type").value(), "width") == 0)
+      {
+         width = atoi(litem.value());
+      }
+      if (strcmp(litem.attribute("type").value(), "height") == 0)
+      {
+         height = atoi(litem.value());
+      }
+   }
+}
+void Config::read_levels(pugi::xml_node node)
+{
+   for (pugi::xml_node litem = item.child("inner"); litem; litem = item.next_sibling("inner"))
+   {
+      std::pair<std::string,std::string> thepair;
+      
+      thepair.first = litem.attribute("name");
+      thepair.second = litem.attribute("file");
 
+      levels.push_back(thepair);
+   }
+}
 void Config::load_level(std::string label, std::string fname)
 {
    Logger::get()->log_info("Loading level");
@@ -71,5 +96,13 @@ Level_Config * Config::get_level(std::string lname)
    if (levels.size() == 0)
       return 0;
 
-   return levels[lname];
+   return load_level(levels[lname]);
+}
+int Config::get_width()
+{
+   return width;
+}
+int Config::get_height()
+{
+   return height;
 }

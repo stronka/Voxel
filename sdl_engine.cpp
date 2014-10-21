@@ -23,10 +23,12 @@ Sdl_Main::~Sdl_Main(void)
 
 
 // Initialization functions
-int Sdl_Main::InitApp(void)
+int Sdl_Main::createWindow(Game_Scene * sc)
 {
     int error;
     Uint32 contextFlags = SDL_WINDOW_SHOWN|SDL_WINDOW_OPENGL;
+
+    scene = sc;
 
     w = 1280.0;
     h = 720.0;
@@ -60,7 +62,7 @@ int Sdl_Main::InitApp(void)
     Logger::get()->log_info(ss.str() );
 
     Logger::get()->log_info("sdl_engine.cpp: Initializing scene");
-    if (game_scene.init(this, w, h) != 0)
+    if (scene->init(this, w, h) != 0)
     {
         Logger::get()->log_error("sdl_engine.cpp: Error initializing scene");
         return 2;
@@ -109,7 +111,7 @@ void Sdl_Main::Cleanup(void)
     SDL_bool success;
     success = SDL_RemoveTimer(timer);
 
-    game_scene.cleanup();
+    scene->cleanup();
     Sdl_Media::get()->cleanup();
 
     SDL_DestroyWindow(mainWindow);
@@ -129,10 +131,10 @@ void Sdl_Main::EventLoop(void)
                 break;
                 
             case SDL_KEYDOWN:
-                game_scene.key_down(event.key.keysym.sym);
+                scene->key_down(event.key.keysym.sym);
                 break;
             case SDL_KEYUP:
-                game_scene.key_up(event.key.keysym.sym);
+                scene->key_up(event.key.keysym.sym);
                 break;
             
             case SDL_QUIT:
@@ -163,7 +165,7 @@ void Sdl_Main::HandleUserEvents(SDL_Event* event)
 // Game related functions
 void Sdl_Main::GameLoop(void)
 {
-   game_scene.update();
+   scene->update();
    RenderFrame();    
 }
 
@@ -173,7 +175,7 @@ void Sdl_Main::RenderFrame(void)
 
    glLoadIdentity();
 
-   game_scene.draw();
+   scene->draw();
 
    SDL_GL_SwapWindow(mainWindow);
 }

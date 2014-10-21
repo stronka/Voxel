@@ -13,4 +13,7 @@ Libaries:
  - SDL\_mixer
  - pugixml (google)
 
-The game uses XML configuration for scene loading
+The game uses XML configuration for scene loading.
+
+The main part of the game is the scene, which is a simple plane.
+The plane is split into voxels,little squares. The look of squares is defined by the configuration

@@ -1,1 +1,6 @@
 http://lazyfoo.net/SDL_tutorials/lesson11/ - mp3
+
+plane should be split into voxels
+animation
+music reading
+music data

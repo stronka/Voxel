@@ -22,7 +22,7 @@ class Sdl_Main
         bool fullscreen;
 
         SDL_Renderer * renderer;
-        Game_Scene game_scene;
+        Game_Scene * game_scene;
 	GLfloat w;
 	GLfloat h;
     
@@ -32,7 +32,7 @@ class Sdl_Main
         virtual ~Sdl_Main(void);
 
         // Initialization functions
-        int InitApp(void);
+        int createWindow(Game_Scene * sc);
         void InstallTimer(void);
         static Uint32 GameLoopTimer(Uint32 interval, void* param);
         void toggle_fullscreen();

@@ -15,13 +15,19 @@ int main(int argc, char *argv[])
 
    Logger::get()->log_debug("main: start");
 
-   Sdl_Main theGame;
+   int Wwidth  = Config::get()->get_width();
+   int Wheight = Config::get()->get_height();
 
-   int result = theGame.InitApp();
+   Sdl_Main theGameWindow(Wwidth, Wheight);
+   Game_Scene scene;
+   scene.load();
+   theGameWindow.set_scene(&scene);
+
+   int result = theGameWindow.createWindow(&scene);
 	
    if (result != 0)
    {
-      theGame.Cleanup();
+      theGameWindow.Cleanup();
       Logger::get()->log_error("Error during game initalization");
       Logger::get()->cleanup();
       return result;
@@ -29,8 +35,8 @@ int main(int argc, char *argv[])
 
    Logger::get()->log_debug("main: reached events");
 
-   theGame.EventLoop();
-   theGame.Cleanup();
+   theGameWindow.EventLoop();
+   theGameWindow.Cleanup();
 
    Logger::get()->log_debug("main: closed");
    Logger::get()->cleanup();

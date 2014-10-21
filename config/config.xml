@@ -1,4 +1,8 @@
 <items>
+   <item type="setup">
+      <inner label="width">1280</inner>;
+      <inner label="height">720</inner>;
+   </item>
    <item type="menu">
       <inner label="Start game" />
       <inner label="Options" />

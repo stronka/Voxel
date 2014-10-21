@@ -31,8 +31,6 @@ void Level_Config::load(std::string label, std::string fname)
    text.append(fname);
    text.append(" done");
    Logger::get()->log_info(text);
-
-   //Logger::get()->log_debug(background);
 }
 
 void Level_Config::load_inner(pugi::xml_node main)

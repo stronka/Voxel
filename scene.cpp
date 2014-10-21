@@ -8,13 +8,13 @@
 
 //SDL_Texture * tex;
 
-int Game_Scene::init(Sdl_Main * en, float width, float height)
+void Game_Scene::Game_Scene(Sdl_Main * en)
 {
-   w = width;
-   h = height;
-
    engine = en;
+}
 
+void Game_Scene::init()
+{
    Level_Config * level1 = Config::get()->get_level("level1");
    if (level1 == 0)
    {
@@ -63,6 +63,9 @@ void Game_Scene::cleanup()
 }
 void Game_Scene::draw()
 {
+   float w = engine->get_width();
+   float h = engine->get_height();
+
    Sdl_Media::get()->draw(background,0.0,0.0,w,h);
 
    std::list<Character*>::iterator it;
