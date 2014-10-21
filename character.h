@@ -27,7 +27,7 @@ class Character
       void go_up(bool on);
       void go_down(bool on);
       void update();
-      void set_sprite(std::string name);
+      void set_sprite(std::string name, int sizex, int sizey);
       void set_name(std::string name);
       void set_start(int pox, int posy);
       void set_input(std::string i);

@@ -21,6 +21,7 @@ class Game_Scene
       GLuint background;
       Character * jake;
       std::list<Character*> characters;
+      Level_Config * level;
 
    public:
       int init();

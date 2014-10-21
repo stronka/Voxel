@@ -14,7 +14,7 @@ void Level_Config::load(std::string label, std::string fname)
 
    pugi::xml_node level = doc.child("level");
 
-   background  = Sdl_Media::get()->load_image(level.attribute("background").value());
+   background  = level.attribute("background").value();
    Logger::get()->log_info("log back ok");
    //music.assign(level.attribute("music").value());
    //Logger::get()->log_info("log music ok");
@@ -45,7 +45,7 @@ void Level_Config::load_inner(pugi::xml_node main)
       int startx, starty;
 
       ch->set_name(item.attribute("label").value());
-      ch->set_sprite(item.attribute("sprite").value());
+      ch->set_sprite(item.attribute("sprite").value(), texel_size, texel_size);
 
       startx = atoi(item.attribute("startx").value());
       starty = atoi(item.attribute("starty").value());
@@ -60,7 +60,7 @@ std::list<Character*> Level_Config::get_characters()
 {
    return characters;
 }
-GLuint Level_Config::get_background()
+std::string Level_Config::get_background()
 {
    return background;
 }

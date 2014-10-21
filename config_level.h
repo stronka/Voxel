@@ -15,7 +15,7 @@ class Level_Config
 {
    std::list<Character*> characters;
    std::list<Game_Item*> items;
-   GLuint background;
+   std::string background;
    std::string music;
    int width;
    int height;
@@ -25,7 +25,7 @@ class Level_Config
       void load(std::string label, std::string fname);
       void load_inner(pugi::xml_node main);
       std::list<Character*> get_characters();
-      GLuint get_background();
+      std::string get_background();
 };
 
 #endif

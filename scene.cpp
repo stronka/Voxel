@@ -15,8 +15,8 @@ void Game_Scene::Game_Scene(Sdl_Main * en)
 
 void Game_Scene::init()
 {
-   Level_Config * level1 = Config::get()->get_level("level1");
-   if (level1 == 0)
+   level = Config::get()->get_level("level1");
+   if (level == 0)
    {
       Logger::get()->log_error("scene.cpp: No level data");
       return -1;
@@ -24,11 +24,11 @@ void Game_Scene::init()
 
    Logger::get()->log_info("scene.cpp: Attaching sprites & characters");
 
-   background = level1->get_background();
+   background = Sdl_Media::load_image(level->get_background());
 
    Logger::get()->log_info("scene.cpp: Attaching characters");
 
-   characters = level1->get_characters();
+   characters = level->get_characters();
 
    jake = NULL;
 
