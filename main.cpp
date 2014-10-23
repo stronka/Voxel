@@ -7,6 +7,7 @@
 
 #include "sdl_engine.h"
 #include "game.h"
+#include "config.h"
 #include "logger.h"
 
 int main(int argc, char *argv[])
@@ -20,7 +21,10 @@ int main(int argc, char *argv[])
 
    Sdl_Main theGameWindow(Wwidth, Wheight);
    Game_Scene scene;
+
+   scene.set_window(theGameWindow);
    scene.load();
+
    theGameWindow.set_scene(&scene);
 
    int result = theGameWindow.createWindow(&scene);

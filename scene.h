@@ -10,6 +10,7 @@
 #include <list>
 #include "game.h"
 #include "character.h"
+#include "config_level.h"
 
 class Game_Scene
 {
@@ -24,8 +25,8 @@ class Game_Scene
       Level_Config * level;
 
    public:
+      void set_window(Sdl_Main * en);
       int init();
-      void Game_Scene(Sdl_Main * en);
       void draw();
       void cleanup();
       void key_down(int key);

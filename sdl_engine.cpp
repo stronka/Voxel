@@ -21,17 +21,19 @@ Sdl_Main::~Sdl_Main(void)
     Cleanup();
 }
 
+void Sdl_Main::set_scene(Game_Scene * sc)
+{
+   scene = sc;
+}
 
 // Initialization functions
-int Sdl_Main::createWindow(Game_Scene * sc)
+int Sdl_Main::createWindow(int width, int height);
 {
     int error;
     Uint32 contextFlags = SDL_WINDOW_SHOWN|SDL_WINDOW_OPENGL;
 
-    scene = sc;
-
-    w = 1280.0;
-    h = 720.0;
+    w = width;
+    h = height;
     
     // Create a 640 by 480 window.
     error = SDL_Init(SDL_INIT_EVERYTHING);

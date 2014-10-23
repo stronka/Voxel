@@ -8,7 +8,7 @@
 
 //SDL_Texture * tex;
 
-void Game_Scene::Game_Scene(Sdl_Main * en)
+void Game_Scene::set_window(Sdl_Main * en)
 {
    engine = en;
 }
