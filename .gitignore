@@ -1,3 +1,5 @@
 *.o
 game
 voxel_log.txt
+Voxel.code-workspace
+.makefile.swp

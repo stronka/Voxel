@@ -1,17 +1,21 @@
 CXX=g++
-CFLAGS=-c `sdl2-config --cflags`
+CFLAGS=-Wall -Wextra --std=c++17
+
+SOURCES=$(wildcard *.cpp)
 LDFLAGS=-lX11 -lGL -lGLU -lSDL2 -lSDL2_image -lSDL2_mixer
-SOURCES=main.cpp sdl_engine.cpp media.cpp config.cpp scene.cpp logger.cpp pugixml.cpp character.cpp config_level.cpp
+SDL_INCLUDE=-IC:/MinGW/include/SDL2
+INCLUDE=$(SDL_INCLUDE)
+
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=game
 
 all: $(SOURCES) $(EXECUTABLE)
 	
 $(EXECUTABLE): $(OBJECTS) 
-	$(CXX) -o $@ $^  $(LDFLAGS)
+	$(CXX) $(INCLUDE) -o $@ $^  $(LDFLAGS)
 
 .cpp.o:
-	$(CXX) $(CFLAGS) $< -o $@
+	$(CXX) $(CFLAGS) $(SDL_INCLUDE) -c $< -o $@
 
 clean:
 	rm -rf *.o
