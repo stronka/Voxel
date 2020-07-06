@@ -11,6 +11,7 @@ INCLUDE=$(SDL_INCLUDE)
 OBJECTS=$(SOURCES:.cpp=.o)
 
 .DEFAULT_GOAL: all
+.PHONY: all
 all: $(OBJECTS) 
 	$(CXX) $(INCLUDE) $(LDFLAGS) -o $(EXECUTABLE) $< 
 
