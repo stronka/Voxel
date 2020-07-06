@@ -1,5 +1,5 @@
 CXX=g++
-CFLAGS=-Wall -Wextra --std=c++17
+CFLAGS=-Wall -Wextra --std=c++17 -ggdb -O0
 
 SOURCES=$(wildcard *.cpp)
 LDFLAGS=-lX11 -lGL -lGLU -lSDL2 -lSDL2_image -lSDL2_mixer
@@ -9,15 +9,13 @@ INCLUDE=$(SDL_INCLUDE)
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=game
 
-all: $(SOURCES) $(EXECUTABLE)
-	
-$(EXECUTABLE): $(OBJECTS) 
-	$(CXX) $(INCLUDE) -o $@ $^  $(LDFLAGS)
+all: $(OBJECTS) 
+	$(CXX) $(INCLUDE) -o $(EXECUTABLE) $< $(LDFLAGS)
 
-.cpp.o:
+%.o: %.cpp
 	$(CXX) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
 	rm -rf *.o
-	rm -rf game
-	rm -rf voxel_log.txt
+	rm -rf $(EXECUTABLE)
+	rm -rf *log.txt
