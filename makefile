@@ -15,7 +15,7 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CXX) $(INCLUDE) -o $@ $^  $(LDFLAGS)
 
 .cpp.o:
-	$(CXX) $(CFLAGS) $(SDL_INCLUDE) -c $< -o $@
+	$(CXX) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
 	rm -rf *.o
