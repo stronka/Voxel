@@ -1,3 +1,5 @@
+EXECUTABLE=game
+
 CXX=g++
 CFLAGS=-Wall -Wextra --std=c++17 -ggdb -O0
 
@@ -7,14 +9,15 @@ SDL_INCLUDE=-IC:/MinGW/include/SDL2
 INCLUDE=$(SDL_INCLUDE)
 
 OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=game
 
+.DEFAULT_GOAL: all
 all: $(OBJECTS) 
-	$(CXX) $(INCLUDE) -o $(EXECUTABLE) $< $(LDFLAGS)
+	$(CXX) $(INCLUDE) $(LDFLAGS) -o $(EXECUTABLE) $< 
 
 %.o: %.cpp
 	$(CXX) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
+.PHONY: clean
 clean:
 	rm -rf *.o
 	rm -rf $(EXECUTABLE)
